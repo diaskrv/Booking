@@ -1,0 +1,13 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+      hbm2ddl:
+        jdbc_metadata_extraction_strategy: individually
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/booking
+    username: postgres
+    password: dking1802
+  flyway:
+    baseline-on-migrate: true
