@@ -4,7 +4,7 @@
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="com.example.booking.domain.User" />
-    <bean id="cabinet" class="com.example.booking.domain.Cabinet" />
-    <bean id="booking" class="com.example.booking.domain.Booking"></bean>
+    <bean id="user" class="com.example.booking.domain.User"/>
+    <bean id="cabinet" class="com.example.booking.domain.Cabinet"/>
+    <bean id="booking" class="com.example.booking.domain.Booking"/>
 </beans>

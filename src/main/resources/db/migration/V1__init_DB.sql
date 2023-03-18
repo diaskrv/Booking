@@ -4,7 +4,7 @@ create sequence user_seq start 1 increment 1;
 create table users (
     id int8 not null,
     email varchar(255) not null,
-    username varchar(255) not null unique,
+    name varchar(255) not null unique,
     password varchar(255) not null,
     role varchar(255) not null,
     primary key (id)

@@ -9,7 +9,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "")
 
 public class User {
     private static final String SEQ_NAME = "user_seq";
@@ -18,7 +18,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQ_NAME)
     @SequenceGenerator(name = SEQ_NAME, sequenceName = SEQ_NAME, allocationSize = 1)
     private Long id;
-    private String username;
+    private String name;
     private String password;
     private String email;
     @Enumerated(EnumType.STRING)

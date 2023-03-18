@@ -1,10 +1,23 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /booking
 spring:
+  security:
+    user:
+      name: admin
+      password: qwerty123
   jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      ddl-auto: validate
       hbm2ddl:
         jdbc_metadata_extraction_strategy: individually
     show-sql: true
+    open-in-view: false
   datasource:
     url: jdbc:postgresql://localhost:5432/booking
     username: postgres
