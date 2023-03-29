@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+<!--    <a th:href="@{/register}"></a>-->
+<!--    <a th:href="@{/login}"></a>-->
+
+    <h1>  AAAAAAAAAAAAAA CHTOTO</h1>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="el:${users}">
+                    <td th:text="${el.id}"></td>
+                    <td th:text="${el.username}"></td>
+                    <td th:text="${el.password}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+<!--    <div>-->
+<!--        ${users}-->
+<!--    </div>-->
+</body>
+</html>

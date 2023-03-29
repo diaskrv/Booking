@@ -1,24 +1,23 @@
 package com.example.booking.services;
 
-import com.example.booking.domain.User;
+import com.example.booking.domain.UserEntity;
+import com.example.booking.dto.UserDTO;
+import com.example.booking.repositories.UsersViewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-public interface UserService {
+@Service
+public class UserService {
 
-    Optional<User> save(User user);
+    @Autowired
+    private UsersViewRepository usersViewRepository;
 
-    List<User> saveAll(List<User> users);
-
-    Optional<User> update(User car);
-
-    Optional<User> get(Long id);
-
-    List<User> getAll();
-
-    Boolean deleteById(Long id);
-
-    Boolean deleteAll();
-
+    public List<UserEntity> getAllUsers(){
+        List<UserEntity> usersList = new ArrayList<UserEntity>();
+        usersViewRepository.findAll().forEach(users -> usersList.add(users));
+        return usersList;
+    }
 }

@@ -1,36 +1,34 @@
 package com.example.booking.controllers;
 
+import com.example.booking.domain.UserEntity;
+import com.example.booking.repositories.UserRepository;
+import com.example.booking.repositories.UsersViewRepository;
 import com.example.booking.services.UserService;
-import com.example.booking.domain.User;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class UserController {
 
-    private final UserService service;
-
     @Autowired
-    public UserController(UserService service) {
-        this.service = service;
-    }
+    private UserService userService;
 
-    @PostMapping
-    public Optional<ResponseEntity<User>> save(@RequestBody User user) {
-        return service.save(user).map(u -> new ResponseEntity<>(u, HttpStatus.OK));
-    }
+//    @GetMapping("/index")
+//    public List<UserEntity> getUsersInfo(){
+//        return userService.getAllUsers();
+//    }
 
-    @GetMapping("/")
-    public String index() {
+    @RequestMapping(value="/index")
+    public String getUsersInfo(Model model){
+
+        model.addAttribute("users", userService.getAllUsers());
         return "index";
-    }
-
-    @GetMapping("/login")
-    public String login() {
-        return "login";
     }
 }
