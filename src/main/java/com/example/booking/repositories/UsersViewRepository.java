@@ -10,6 +10,5 @@ import java.util.Optional;
 public interface UsersViewRepository extends JpaRepository<UserEntity, Integer> {
 
     List<UserEntity> findAll();
-//    UserEntity findByUsername(String username);
-//    UserEntity findById(int id);
+    Optional<UserEntity> findById(Integer id);
 }

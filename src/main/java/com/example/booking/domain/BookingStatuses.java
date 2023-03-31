@@ -1,8 +1,9 @@
 package com.example.booking.domain;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,4 +14,6 @@ public class BookingStatuses {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @OneToMany(mappedBy = "bookingStatuses")
+    private List<Booking> bookings;
 }

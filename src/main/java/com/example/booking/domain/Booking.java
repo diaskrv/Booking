@@ -1,15 +1,13 @@
 package com.example.booking.domain;
 
-import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
@@ -22,21 +20,20 @@ public class Booking {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private int people_number;
+    private int peoplenumber;
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userid")
     private UserEntity user;
     @OneToOne
-    @JoinColumn(name = "cabinet_id")
+    @JoinColumn(name = "cabinetid")
     private Cabinet cabinet;
     @CreationTimestamp
-    private LocalDateTime created_time;
+    private LocalDateTime createdtime;
     private Timestamp timing;
     @UpdateTimestamp
-    private LocalDateTime updated_time;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "booking_statuses_relationship", joinColumns = @JoinColumn(name = "booking_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "status_id", referencedColumnName = "id"))
-    private List<BookingStatuses> roles = new ArrayList<>();
+    private LocalDateTime updatedtime;
+    @ManyToOne
+    @JoinColumn(name="bookingstatus")
+    BookingStatuses bookingStatuses;
 }
 

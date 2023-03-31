@@ -1,16 +1,29 @@
 package com.example.booking.services;
 
-import com.example.booking.dto.CabinetDTO;
-import com.example.booking.dto.CabinetResponse;
+import com.example.booking.domain.Cabinet;
+import com.example.booking.domain.UserEntity;
+import com.example.booking.repositories.CabinetRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public interface CabinetService {
-    CabinetDTO createCabinet(CabinetDTO cabinetDto);
-    CabinetResponse getAllCabinets(int pageNo, int pageSize);
-    CabinetDTO getCabinetById(int id);
-    CabinetDTO updateCabinet(CabinetDTO cabinetDto, int id);
-    void deleteCabinetId(int id);
+public class CabinetService {
+
+    @Autowired
+    private CabinetRepository cabRepository;
+
+    public List<Cabinet> getAllCabinets(){
+        List<Cabinet> cabinetList = new ArrayList<>();
+        cabRepository.findAll().forEach(cabinet -> cabinetList.add(cabinet));
+        return cabinetList;
+    }
+    public Cabinet getCabinetByNumber(Integer number){
+        return cabRepository.findByNumber(number).orElse(null);
+    }
+    public Cabinet getCabinetByQuadrature(Integer quadrature){
+        return cabRepository.findByQuadrature(quadrature).orElse(null);
+    }
 }

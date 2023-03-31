@@ -2,7 +2,6 @@ package com.example.booking.controllers;
 
 import com.example.booking.domain.Roles;
 import com.example.booking.domain.UserEntity;
-import com.example.booking.dto.AuthResponseDTO;
 import com.example.booking.dto.LoginDTO;
 import com.example.booking.dto.RegisterDTO;
 import com.example.booking.repositories.RoleRepository;
@@ -18,27 +17,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
-    private AuthenticationManager authenticationManager;
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
-    private PasswordEncoder passwordEncoder;
-
-
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository,
-                          RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
-        this.authenticationManager = authenticationManager;
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginDTO loginDto){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -50,7 +44,7 @@ public class AuthController {
         return new ResponseEntity<>("User signed successfully!", HttpStatus.OK);
     }
 
-    @PostMapping("register")
+    @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDto) {
         if (userRepository.existsByUsername(registerDto.getUsername())) {
             return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
@@ -60,8 +54,8 @@ public class AuthController {
         user.setUsername(registerDto.getUsername());
         user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
 
-        Roles roles = roleRepository.findByName("USER").get();
-        user.setRoles(Collections.singletonList(roles));
+        Optional<Roles> roles = roleRepository.findByName("USER");
+        roles.ifPresent(value -> user.setRoles(Collections.singletonList(value)));
 
         userRepository.save(user);
 
