@@ -31,6 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cabinet").permitAll()
                 .antMatchers("/cabinet/{number_of_cab}").permitAll()
                 .antMatchers("/cabinet/quadrature/{quadrature}").permitAll()
+                .antMatchers("/cabinet/create").hasRole("ADMIN")
+                .antMatchers("/cabinet/{id}/update").permitAll()
+                .antMatchers("/cabinet/{id}/delete").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable();

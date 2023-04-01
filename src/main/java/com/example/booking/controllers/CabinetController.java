@@ -1,8 +1,11 @@
 package com.example.booking.controllers;
 
 import com.example.booking.domain.Cabinet;
+import com.example.booking.dto.CabinetDTO;
 import com.example.booking.services.CabinetService;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,22 +35,22 @@ public class CabinetController {
     public ResponseEntity<Cabinet> cabinetByNumber(@PathVariable int number) {
         return ResponseEntity.ok(cabinetService.getCabinetByNumber(number));
     }
-//
-//    @PostMapping("cabinet/create")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public ResponseEntity<CabinetDTO> createPokemon(@RequestBody CabinetDTO cabinetDto) {
-//        return new ResponseEntity<>(cabinetService.createCabinet(cabinetDto), HttpStatus.CREATED);
-//    }
-//
-//    @PutMapping("cabinet/{id}/update")
-//    public ResponseEntity<CabinetDTO> updatePokemon(@RequestBody CabinetDTO cabinetDto, @PathVariable("id") int cabinetId) {
-//        CabinetDTO response = cabinetService.updateCabinet(cabinetDto, cabinetId);
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
-//
-//    @DeleteMapping("cabinet/{id}/delete")
-//    public ResponseEntity<String> deleteCabinet(@PathVariable("id") int cabinetId) {
-//        cabinetService.deleteCabinetId(cabinetId);
-//        return new ResponseEntity<>("Cabinet delete", HttpStatus.OK);
-//    }
+
+    @PostMapping("cabinet/create")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<CabinetDTO> createPokemon(@RequestBody CabinetDTO cabinetDto) {
+        return new ResponseEntity<>(cabinetService.createCabinet(cabinetDto), HttpStatus.CREATED);
+    }
+
+    @PutMapping("cabinet/update/{id}")
+    public Cabinet updateCabinetInfo(@PathVariable int id, @RequestBody Cabinet cabinet){
+        cabinet.setId(id);
+        return cabinetService.updateCabinet(cabinet);
+    }
+
+    @DeleteMapping("cabinet/{id}/delete")
+    public ResponseEntity<String> deleteCabinet(@PathVariable("id") int cabinetId) throws NotFoundException {
+        cabinetService.deleteCabinetId(cabinetId);
+        return new ResponseEntity<>("Cabinet delete", HttpStatus.OK);
+    }
 }
