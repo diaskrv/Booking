@@ -23,10 +23,4 @@ public class UserController {
     public ResponseEntity<UserEntity> userDetail(@PathVariable int id){
         return ResponseEntity.ok(userService.findById(id));
     }
-
-//        @RequestMapping(value="/index")
-//    public String getUsersInfo(Model model){
-//        model.addAttribute("users", userService.getAllUsers());
-//        return "index";
-//    }
 }

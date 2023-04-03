@@ -3,11 +3,6 @@ package com.example.booking.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Getter
 @Setter
@@ -27,13 +22,8 @@ public class Booking {
     @OneToOne
     @JoinColumn(name = "cabinetid")
     private Cabinet cabinet;
-    @CreationTimestamp
-    private LocalDateTime createdtime;
-    private Timestamp timing;
-    @UpdateTimestamp
-    private LocalDateTime updatedtime;
-    @ManyToOne
-    @JoinColumn(name="bookingstatus")
-    BookingStatuses bookingStatuses;
+//    @ManyToOne
+//    @JoinColumn(name="bookingstatus")
+//    BookingStatuses bookingStatuses;
 }
 

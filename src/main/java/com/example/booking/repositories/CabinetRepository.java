@@ -14,6 +14,4 @@ public interface CabinetRepository extends JpaRepository<Cabinet, Integer> {
     Optional<Cabinet> findByNumber(Integer number);
 
     Optional<Cabinet> findByQuadrature(Integer quadrature);
-//
-//    Optional<Cabinet> findByPlacesNumber(Integer places_number);
 }
